@@ -1,0 +1,150 @@
+pages:
+  # distortions page
+  - name: Distortion
+    id: 0
+    controls:
+    - name: Clean
+      button: '1'
+    - name: Tremolo
+      button: '2'
+    - name: Crunch
+      button: '3'
+    - name: Distortion
+      button: '4'
+    - name: Metal
+      button: '5'
+    - name: Fuzz
+      button: '6'
+    - name: Preset
+      function: preset
+      button: 'A'
+  # pedals page
+  - name: Pedal
+    id: 1
+    controls:
+    - name: RockWah
+      pedal: True
+      button: '1'
+      curve: 0.5
+    - name: MetalWah
+      pedal: True
+      button: '2'
+      curve: 0.1
+    - name: Preset
+      function: preset
+      button: 'A'
+    # not many useful pedals to be found yet
+  # FX
+  - name: FX
+    id: 2
+    controls:
+    - name: Slap
+      button: '1'
+    - name: Delay
+      button: '2'
+    - name: Psychedelic
+      button: '3'
+    - name: Reverb
+      button: '4'
+    - name: Shimmer
+      button: '5'
+    - name: Chorus
+      button: '6'
+    - name: Preset
+      function: preset
+      button: 'A'
+  # Bass
+  - name: Bass
+    id: 3
+    controls:
+    - name: Solid
+      button: '1'
+    - name: Tube
+      button: '2'
+    - name: Drive
+      button: '3'
+    - name: Distortion
+      button: '4'
+    - name: Fuzz
+      button: '5'
+  # Control
+  - name: Control
+    id: 11
+    controls:
+    - name: Record
+      type: momentary
+      button: '1'
+    - name: LeftCh
+      button: '2'
+    - name: RightCh
+      button: '3'
+    - name: BassCh
+      button: '4'
+    - name: Sync
+      function: sync
+      type: trigger
+      button: '6'
+    - name: GuitarOn
+      button: 'C'
+    - name: BassOn
+      button: 'D'
+zones:
+  - name: Distortion
+    controls:
+    - "Distortion:Clean"
+    - "Distortion:Tremolo"
+    - "Distortion:Crunch"
+    - "Distortion:Distortion"
+    - "Distortion:Metal"
+    - "Distortion:Fuzz"
+    xor: True  # distortion needs xor
+  - name: Pedal
+    controls:
+    - "Pedal:RockWah"
+    - "Pedal:MetalWah"
+  - name: Delay
+    controls:
+    - "FX:Slap"
+    - "FX:Delay"
+    - "FX:Psychedelic"
+  - name: Reverb
+    controls:
+    - "FX:Reverb"
+    - "FX:Shimmer"
+  - name: Bass
+    controls:
+    - "Bass:Solid"
+    - "Bass:Tube"
+    - "Bass:Drive"
+    - "Bass:Distortion"
+    - "Bass:Fuzz"
+    xor: True  # bass needs xor
+  - name: ControlCh
+    controls:
+    - "Control:LeftCh"
+    - "Control:RightCh"
+    - "Control:BassCh"
+  - name: ControlOn
+    controls:
+    - "Control:GuitarOn"
+    - "Control:BassOn"
+preset:
+  # list all controls that are part of presets
+  - "Distortion:Clean"
+  - "Distortion:Tremolo"
+  - "Distortion:Crunch"
+  - "Distortion:Distortion"
+  - "Distortion:Metal"
+  - "Distortion:Fuzz"
+  - "Pedal:RockWah"
+  - "Pedal:MetalWah"
+  - "FX:Slap"
+  - "FX:Delay"
+  - "FX:Psychedelic"
+  - "FX:Reverb"
+  - "FX:Shimmer"
+  - "FX:Chorus"
+midiconfig:
+  input: PACER
+  output: Virtual MIDI
+  feedback: PACER

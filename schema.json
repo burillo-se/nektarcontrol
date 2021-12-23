@@ -1,0 +1,154 @@
+{
+    "type": "object",
+    "properties": {
+        "pages": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/page"
+            },
+            "minItems": 1
+        },
+        "zones": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/zone"
+            },
+            "minItems": 1
+        },
+        "preset": {
+            "$ref": "#/$defs/preset"
+        },
+        "midiconfig": {
+            "$ref": "#/$defs/midiconfig"
+        }
+    },
+    "required": ["pages", "zones", "preset", "midiconfig"],
+    "$defs": {
+        "midiconfig": {
+            "type": "object",
+            "properties": {
+                "input": {
+                    "type": "string"
+                },
+                "output": {
+                    "type": "string"
+                },
+                "feedback": {
+                    "type": "string"
+                }
+            },
+            "required": ["input", "output", "feedback"]
+        },
+        "path": {
+            "type": "string",
+            "pattern": "^([\\w]+)\\:([\\w]+)$"
+        },
+        "preset": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/path"
+            },
+            "minItems": 1
+        },
+        "zonebutton": {
+            "type": "string",
+            "pattern": "^([\\w]+)\\:([\\w]+)$"
+        },
+        "zone": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "^([\\w]+)$"
+                },
+                "controls": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/zonebutton"
+                    },
+                    "minItems": 1
+                },
+                "xor": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "required": ["name", "controls"],
+            "additionalProperties": false
+        },
+        "control": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "^([\\w]+)$"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": ["momentary", "toggle", "trigger"],
+                    "default": "toggle"
+                },
+                "curve": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "default": 0.5
+                },
+                "pedal": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "button": {
+                    "type": "string",
+                    "pattern": "^[1-6a-dA-D]$"
+                },
+                "function": {
+                    "type": "string",
+                    "enum": ["command", "preset", "sync"],
+                    "default": "command"
+                },
+                "onpress": {
+                    "type": "array",
+                    "items": {
+                        "type": "int",
+                        "minimum": 0,
+                        "maximum": 127
+                    },
+                    "default": [127]
+                },
+                "onrelease": {
+                    "type": "array",
+                    "items": {
+                        "type": "int",
+                        "minimum": 0,
+                        "maximum": 127
+                    },
+                    "default": [0]
+                }
+            },
+            "required": ["name", "button"],
+            "additionalProperties": false
+        },
+        "page": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "^([\\w]+)$"
+                },
+                "controls": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/control"
+                    },
+                    "minItems": 1
+                },
+                "id": {
+                    "type": "integer"
+                }
+            },
+            "required": ["name", "controls", "id"],
+            "additionalProperties": false
+        }
+    }
+}
